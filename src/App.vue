@@ -1,5 +1,5 @@
 <template>
-  <div class="page light">
+  <div class="page">
     <h1 class="name">Liew Kai Le</h1>
     <p class="description">I'm a frontend developer</p>
     <img class="profile_pic" src="./assets/profile_pic.jpg" alt="Profile pic" />
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
 
 * {
   margin: 0;
@@ -31,15 +31,12 @@ export default {
   height: calc(100vh - 40px);
   width: calc(100vw - 80px);
   padding: 40px 40px 0 40px;
-}
-
-.light {
   background: #FAF2DF;
   color: #000;
 }
 
 .dark {
-  background: #152238;
+  background: #192841;
   color: #FFF;
 }
 
