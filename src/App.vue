@@ -1,26 +1,61 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="page light">
+    <h1 class="name">Liew Kai Le</h1>
+    <p class="description">I'm a frontend developer</p>
+    <img class="profile_pic" src="./assets/profile_pic.jpg" alt="Profile pic" />
+    <h1>Work experience</h1>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  created() {
+    document.title = "Liew Kai Le";
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.page {
+  height: calc(100vh - 40px);
+  width: calc(100vw - 80px);
+  padding: 40px 40px 0 40px;
+}
+
+.light {
+  background: #FAF2DF;
+  color: #000;
+}
+
+.dark {
+  background: #152238;
+  color: #FFF;
+}
+
+.name {
+  font-weight: 800;
+  font-size: 60px;
+}
+
+.description {
+  font-size: 30px;
+}
+
+.profile_pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
+  object-fit: cover;
 }
 </style>
