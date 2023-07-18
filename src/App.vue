@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="navbar_custom">
-      <p class="navbar_title">Liew Kai Le</p>
+      <a href="#home" class="navbar_title">Liew Kai Le</a>
       <div class="navbar_section">
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -14,13 +14,21 @@
     </div>
     <div class="page_inner">
       <section id="home">
-        <p class="description">I'm a freelancer</p>
-        <p class="description">as</p>
-        <div class="typewriter" id="myTypewriter">
-          <h1 class="typewriterText" id="myTypewriterText">Python developer</h1>
+        <div class="home_empty"></div>
+        <div class="home_div">
+          <p class="description">I'm a</p>
+          <p class="description" style="text-decoration: underline;">Freelancer</p>
+          <p class="description">as</p>
+          <div class="typewriter" id="myTypewriter">
+            <h1 class="typewriterText" id="myTypewriterText">Python developer</h1>
+          </div>
+          <div></div>
         </div>
-        <div></div>
-        <img class="profile_pic" src="./assets/profile_pic.jpg" alt="Profile pic" />
+        <div class="home_empty"></div>
+        <div class="home_div">
+          <img class="profile_pic" src="./assets/profile_pic.jpg" alt="Profile pic" />
+        </div>
+        <div class="home_empty"></div>
       </section>
       <section id="about">
         <h1 class="title">About</h1>
@@ -97,17 +105,28 @@ export default {
   margin-left: 50px;
   font-size: 50px;
   margin-right: 0;
-  color: black;
-  overflow: hidden;
-  background: linear-gradient(to right, #FAF2DF, #FAF2DF 50%, black 50%);
+  text-decoration: none;
+  background: linear-gradient(
+      to right,
+      crimson 20%,
+      #0190cd 40%,
+      #0575E6 60%,
+      #764ada 80%,
+      crimson 100%
+  );
+  background-size: 200% auto;
+  color: #000;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% 100%;
-  background-position: 100%;
-  transition: background-position 500ms ease;
-  text-decoration: none;
+  animation: shine 1s linear infinite;
 }
+
+@keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
 
 .navbar_section {
   margin-left: auto;
@@ -119,9 +138,9 @@ export default {
   position: relative;
   display: inline-block;
   margin-left: 20px;
-  color: lightblue;
+  color: #000;
   overflow: hidden;
-  background: linear-gradient(to right, #FAF2DF, #FAF2DF 50%, lightblue 50%);
+  background: linear-gradient(to right, #FAF2DF, #FAF2DF 50%, #000 50%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -132,23 +151,38 @@ export default {
 
 }
 
-.navbar_title:hover, .navbar_section > *:hover {
+.navbar_section > *:hover {
   background-position: 0 100%;
   cursor: pointer;
 }
 
 .page_inner {
+  padding-top: 100px;
 }
 
 section {
-  height: calc(100vh - 40px);
-  width: calc(100vw - 80px);
-  padding: 80px 40px 0 40px;
+  height: calc(100vh - 200px);
+  width: calc(100vw - 100px);
+  padding: 80px 40px 0;
   scroll-margin-top: 120px;
 }
 
 section#home {
-  padding: 200px 40px 0 40px;
+  padding: 100px 40px 0 40px;
+  display: flex;
+  background-image: url('./assets/sunset.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home_div {
+  width: 30%;
+  margin: auto;
+}
+
+.home_empty {
+  width: 10%;
 }
 
 .title {
@@ -156,7 +190,8 @@ section#home {
 }
 
 .description {
-  font-size: 30px;
+  font-size: 45px;
+  color: #ECE090;
 }
 
 .typewriter {
@@ -168,7 +203,9 @@ section#home {
   border-right: .15em solid orange; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  float: left;
+  float: left; /* Lean to left */
+  font-size: 45px;
+  color: #ECE090;
   animation: 
   typing 2.5s steps(30, end),
   blink-caret .75s step-end infinite;
@@ -195,5 +232,38 @@ section#home {
 
 section#about {
   background: lightgreen;
+}
+
+@media only screen and (max-width: 1016px) {
+  section {
+    height: calc(100vh - 100px);
+    width: 100%;
+    scroll-margin-top: 160px;
+  }
+
+  section#home {
+    flex-direction: column;
+    margin: auto;
+    padding: 120px 0 0;
+  }
+
+  .home_div {
+    width: 100%;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 30px;
+  }
+
+  .typewriterText {
+    font-size: 30px;
+  }
+
+  .profile_pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+  }
 }
 </style>
