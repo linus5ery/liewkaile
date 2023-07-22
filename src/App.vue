@@ -1,21 +1,21 @@
 <template>
   <div class="page">
-    <div class="navbar_custom">
+    <nav class="navbar_custom">
       <a href="#home" class="navbar_title">Liew Kai Le</a>
       <div class="navbar_section">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#workExperience">Work Experience</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#rating">Rating</a>
-        <a href="#contact">Contact</a>
+        <a href="#home" class="home active">Home</a>
+        <a href="#about" class="about">About</a>
+        <a href="#services" class="services">Services</a>
+        <a href="#workExperience" class="workExperience">Work Experience</a>
+        <a href="#portfolio" class="portfolio">Portfolio</a>
+        <a href="#rating" class="rating">Rating</a>
+        <a href="#contact" class="contact">Contact</a>
       </div>
-    </div>
+    </nav>
     <div class="page_inner">
       <section id="home">
         <div class="home_empty"></div>
-        <div class="home_div">
+        <div class="home_div reveal_left">
           <p class="description">I'm a</p>
           <p class="description" style="text-decoration: underline;">Freelancer</p>
           <p class="description">as</p>
@@ -25,13 +25,19 @@
           <div></div>
         </div>
         <div class="home_empty"></div>
-        <div class="home_div">
+        <div class="home_div reveal_right">
           <img class="profile_pic" src="./assets/profile_pic.jpg" alt="Profile pic" />
         </div>
         <div class="home_empty"></div>
       </section>
       <section id="about">
         <h1 class="title">About</h1>
+      </section>
+      <section id="services">
+        <h1 class="title">Services</h1>
+      </section>
+      <section id="workExperience">
+        <h1 class="title">Work Experience</h1>
       </section>
     </div>
   </div>
@@ -46,12 +52,22 @@ export default {
     return {
       messages: ["PHP developer","Vue developer","Python developer"],
       rank: 0,
+      currentHath: "",
     };
   },
   created() {
     document.title = "Liew Kai Le";
   },
   mounted() {
+    this.reveal();
+    this.active_link();
+
+    this.currentPath = window.location.pathname + "#home";
+
+    window.addEventListener("scroll", this.reveal);
+    window.addEventListener("scroll", this.active_link);
+    window.addEventListener("scroll", this.change_url);
+
     // Code for Chrome, Safari and Opera
     document.getElementById("myTypewriter").addEventListener("webkitAnimationEnd", this.changeTxt);
 
@@ -68,7 +84,78 @@ export default {
           _h1.style.webkitAnimation = 'typing '+speed+'s steps(40, end), blink-caret .75s step-end infinite'; //  switch to the original set of animation      
           (this.rank===this.messages.length-1)?this.rank=0:this.rank++; // if you have displayed the last message from the array, go back to the first one, else go to next message
       }, 1000)
-    }
+    },
+    reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      var reveal_lefts = document.querySelectorAll(".reveal_left");
+      var reveal_rights = document.querySelectorAll(".reveal_right");
+
+      this.reveal_inner(reveals);
+      this.reveal_inner(reveal_lefts);
+      this.reveal_inner(reveal_rights);
+    },
+    reveal_inner(reveals) {
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        } else {
+          reveals[i].classList.remove("active");
+        }
+      }
+    },
+    active_link() {
+        const sections = document.querySelectorAll("section");
+        const navA = document.querySelectorAll("nav .navbar_section a");
+        var current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navA.forEach((a) => {
+          a.classList.remove("active");
+
+          if (a.classList.contains(current)) {
+            a.classList.add("active");
+          }
+        });
+    },
+    change_url() {
+      const sections = document.querySelectorAll("section");
+      const navA = document.querySelectorAll("nav .navbar_section a");
+      var current = "";
+      var path = window.location.pathname + "#" + current;
+      var changePath = false;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 200)
+          current = section.getAttribute("id");
+        }
+      );
+
+      navA.forEach((a) => {
+        if (a.classList.contains(current)) {
+          path = window.location.pathname + "#" + current;
+          if(path != this.currentPath) {
+            changePath = true;
+          }
+        }
+      });
+
+      if(changePath == true) {
+          console.log("window.location.pathname", path);
+          this.currentPath = path;
+          window.history.pushState(null, "", this.currentPath);
+      }
+    },
   }
 }
 </script>
@@ -99,6 +186,7 @@ export default {
   background: #50C878;
   padding-top: 50px;
   padding-bottom: 50px;
+  z-index: 1;
 }
 
 .navbar_title {
@@ -151,18 +239,50 @@ export default {
 
 }
 
-.navbar_section > *:hover {
+.navbar_section > *:hover, .navbar_section > *.active {
   background-position: 0 100%;
   cursor: pointer;
 }
 
 .page_inner {
   padding-top: 100px;
+  z-index: 0;
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1.5s all ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.reveal_left {
+  position: relative;
+  transform: translateX(-150px);
+  opacity: 0;
+  transition: 1.5s all ease;
+}
+
+.reveal_right {
+  position: relative;
+  transform: translateX(150px);
+  opacity: 0;
+  transition: 1.5s all ease;
+}
+
+.reveal_left.active, .reveal_right.active {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 section {
   height: calc(100vh - 200px);
-  width: calc(100vw - 100px);
+  width: calc(100vw - 97px);
   padding: 80px 40px 0;
   scroll-margin-top: 120px;
 }
@@ -234,14 +354,28 @@ section#about {
   background: lightgreen;
 }
 
+section#services {
+  background: #FF8BA0;
+}
+
+section#workExperience {
+  background: #598BAf;
+}
+
+@media only screen and (max-width: 400px) {
+  section {
+    width: 100vw;
+  }
+}
+
 @media only screen and (max-width: 1016px) {
   section {
     height: calc(100vh - 100px);
-    width: 100%;
     scroll-margin-top: 160px;
   }
 
   section#home {
+    width: 100%;
     flex-direction: column;
     margin: auto;
     padding: 120px 0 0;
