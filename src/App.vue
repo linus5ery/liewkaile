@@ -32,6 +32,20 @@
       </section>
       <section id="about">
         <h1 class="title">About</h1>
+        <div class="about_div">
+          <div class="about_div_inner">
+            <p class="about_description reveal">
+              Hey there! I got 3 years plus of experience as developer. I like to discover new technologies, especially in software field.
+              I switched to freelance and dedicated to <u>Upwork</u>. Feel free to contact me for any exciting project!
+            </p>
+          </div>
+          <div class="about_div_inner">
+            <p class="about_description reveal">
+              My speciality on programming language is <u>Python, PHP and Vue</u>. I prefer doing web programming than native app programming
+              because there is so much possibility in web, also with responsive design.
+            </p>
+          </div>
+        </div>
       </section>
       <section id="services">
         <h1 class="title">Services</h1>
@@ -354,6 +368,19 @@ section#about {
   background: lightgreen;
 }
 
+.about_div {
+  display: flex;
+}
+
+.about_div_inner {
+  width: 45vw;
+  margin: 20px 2.5vw 0 0;
+}
+
+.about_description {
+  font-size: 30px;
+}
+
 section#services {
   background: #FF8BA0;
 }
@@ -362,9 +389,13 @@ section#workExperience {
   background: #598BAf;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 499px) {
   section {
     width: 100vw;
+  }
+
+  .title {
+    font-size: 36px;
   }
 }
 
@@ -375,8 +406,8 @@ section#workExperience {
   }
 
   section#home {
-    width: 100%;
     flex-direction: column;
+    width: 100%;
     margin: auto;
     padding: 120px 0 0;
   }
@@ -399,5 +430,19 @@ section#workExperience {
     height: 200px;
     border-radius: 200px;
   }
+
+  .about_div {
+    flex-direction: column;
+  }
+
+  .about_div_inner {
+    width: 100%;
+    margin: 20px 0 0 0;
+  }
+
+  .about_description {
+    font-size: 20px;
+  }
+
 }
 </style>
