@@ -394,6 +394,10 @@ section#workExperience {
     width: 100vw;
   }
 
+  section#home {
+    width: 120vw;
+  }
+
   .title {
     font-size: 36px;
   }
@@ -407,7 +411,6 @@ section#workExperience {
 
   section#home {
     flex-direction: column;
-    width: 100%;
     margin: auto;
     padding: 120px 0 0;
   }
